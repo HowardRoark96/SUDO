@@ -1,0 +1,35 @@
+<div class="board-container">
+  <table class="game-board">
+    <tbody>
+    <tr *ngFor="let line of board; let lineInd = index">
+      <td *ngFor="let cell of line; let cellInd = index"
+          (click)="selectCell(lineInd, cellInd)"
+          [class.disabled]="cell.disable"
+          [class.highlighted-number]="cell.value === selectedNumber"
+          [class.highlighted-cell]="cell.isCellHighlighted && !cell.disable"
+          [class.highlighted-disabled-cell]="cell.isCellHighlighted && cell.disable"
+          [class.red-text]="!cell.isValid"
+      >
+      <span>
+        {{cell.value !== 0 ? cell.value : ""}}
+      </span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <table class="control-panel">
+    <tbody>
+    <tr *ngFor="let row of controlPanel">
+      <td *ngFor="let digit of row"
+          (click)="selectNumber(digit)"
+          [class.selected]="digit === selectedNumber"
+      >
+      <span>
+        {{digit}}
+      </span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

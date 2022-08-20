@@ -1,0 +1,16 @@
+<div class="sudoku-container">
+  <app-board [board]="board.gameBoard"
+             (boardChange)="boardChange($event)"
+  ></app-board>
+  <button (click)="generateBoard()"
+          class="btn"
+  >
+    Generate new game
+  </button>
+  <div *ngIf="isSudokuCorrect"
+       class="result"
+  >
+    You win!
+  </div>
+</div>
+

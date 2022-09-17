@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SudokuComponent } from './sudoku/sudoku.component';
 import { BoardComponent } from './board/board.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AuthModule } from './modules/auth-module/auth.module';
 
 @NgModule({
   declarations: [
@@ -15,9 +16,10 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule,
-    ReactiveFormsModule
+    AppRoutingModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

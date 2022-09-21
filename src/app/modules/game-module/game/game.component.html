@@ -1,0 +1,38 @@
+<div class="game-container">
+  <app-game-board
+    [board]="board.gameBoard"
+    [selectedNumber]="selectedNumber"
+    [gameOver]="isGameFinished"
+    [gamePause]="!isGameActive"
+    (boardChange)="boardChange($event)">
+  </app-game-board>
+
+  <div class="actions">
+
+    <app-game-controls
+      (selectNumberChanged)="selectNumberChanged($event)"
+      [disableControls]="isGameFinished || !isGameActive">
+
+    </app-game-controls>
+
+    <button class="btn"
+            (click)="getNewGame()">
+      New game
+    </button>
+
+    <div class="timer">
+      <span>{{gameTime | time}}</span>
+      <mat-icon
+        *ngIf="isGameActive && !isGameFinished"
+        (click)="pauseGame()">
+        pause_circle_filled
+      </mat-icon>
+      <mat-icon *ngIf="!isGameActive && !isGameFinished"
+                (click)="pauseGame()">
+        play_circle_filled
+      </mat-icon>
+    </div>
+
+  </div>
+</div>
+

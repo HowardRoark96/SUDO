@@ -8,6 +8,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { FirebaseOptions } from 'firebase/app';
+import { SharedModule } from './shared-module/shared.module';
 
 
 const firebaseConfig: FirebaseOptions = {
@@ -24,9 +25,8 @@ const firebaseConfig: FirebaseOptions = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    LoginModule,
-    RegisterModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    SharedModule.forRoot()
   ],
   providers: [],
   declarations: []

@@ -1,0 +1,111 @@
+@import "src/styles/colors";
+
+$board_border_color: $black_coffee;
+$cell_border_color: lighten($black_coffee, 20%);
+
+$cell_background: lighten($ivory, 5%);
+$cell_disabled_background: darken($ivory, 5%);
+$cell_disabled_highlited: darken($ivory, 20%);
+
+$cell_error_background: $nadeshiko_pink;
+$cell_error_color: $red_salsa;
+
+:host {
+  position: relative;
+}
+
+.game-board {
+  width: 500px;
+  border-collapse: collapse;
+  font-size: 28px;
+
+  & tbody:first-child {
+    border-top: 2px solid $board_border_color;
+  }
+
+  & tbody:last-child {
+    border-bottom: 2px solid $board_border_color;
+  }
+
+  td {
+    border: 1px solid $cell_border_color;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    transition: all .2s;
+    background: $cell_background;
+
+    &.disabled {
+      cursor: pointer;
+      background-color: $cell_disabled_background;
+    }
+
+    &.highlighted-number {
+      opacity: 1;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    &.highlighted-cell {
+      background-color: darken($cell_disabled_background, 10%);
+    }
+
+    &.highlighted-disabled-number {
+      background-color: darken($cell_disabled_highlited, 10%);
+    }
+
+    &:hover:not(.disabled) {
+      background-color: lighten($cell_background, 8%);;
+      cursor: pointer;
+    }
+
+    &:first-child {
+      border-left: 2px solid $board_border_color;
+    }
+
+    &:nth-child(3n + 3):not(:last-child),
+    &:last-child {
+      border-right: 2px solid $board_border_color;
+    }
+  }
+
+  tr:nth-child(3n + 3):not(:last-child) {
+    border-bottom: 2px solid $board_border_color;
+  }
+
+  .error {
+    color: $cell_error_color;
+    background: $cell_error_background;
+  }
+}
+
+.game-board-locker {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &::before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: $cell_disabled_background;
+    opacity: .9;
+  }
+
+  .title {
+    padding: 40px;
+    font-size: 35px;
+    text-transform: uppercase;
+    color: $black_coffee;
+    z-index: 10;
+  }
+}

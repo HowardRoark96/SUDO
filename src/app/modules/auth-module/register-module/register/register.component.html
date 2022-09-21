@@ -1,2 +1,16 @@
-<div>REGISTER</div>
-<button [routerLink]="['../login']">to login</button>
+<div class="login-container">
+  <app-auth-form (submitted)="onSignUp($event)">
+    <h1>Sign up</h1>
+
+    <button type="submit">Sign up</button>
+
+    <span>Already have an account? <a routerLink="../login">Login</a></span>>
+
+        <div
+          *ngIf="error"
+          class="error">
+          {{ error }}
+        </div>
+  </app-auth-form>
+</div>
+

@@ -1,0 +1,120 @@
+@import "src/styles/colors";
+
+$background_color: $mint_cream;
+$text_color: $black_coffee;
+$error_text_color: $red_salsa;
+
+
+:host::ng-deep{
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  button {
+    cursor: pointer;
+    outline: 0;
+    width: 75%;
+    border: 1px solid $text_color;
+    background: transparent;
+    color: $text_color;
+    padding: 10px;
+    font-size: 16px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background: lighten($background_color, 10%);
+      border-color: $text_color;
+    }
+
+    &:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+  }
+
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    &__toggle {
+      margin-top: auto;
+
+      span a {
+        text-decoration: underline;
+        color: $text_color;
+
+        &:hover {
+          color: $text_color;
+        }
+      }
+    }
+
+    .field {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      padding: 10px 15px;
+      border: 1px solid $text_color;
+      border-radius: 0;
+      margin-bottom: 15px;
+      color: $text_color;
+      transition: all 0.2s ease-in-out;
+
+      input {
+        outline: 0;
+        padding-left: 10px;
+        font-size: 16px;
+        margin: 0;
+        width: 100%;
+        background-color: transparent;
+        border: none;
+        color: $text_color;
+
+        &::placeholder {
+          color: lighten($text_color, 5%);
+        }
+
+        &:-webkit-autofill,
+        &:-webkit-autofill:focus {
+          transition: background-color 600000s 0s, color 600000s 0s;
+        }
+      }
+
+      &:hover,
+      &:focus-within {
+        background: lighten($background_color, 30%);
+        border-color: $text_color;
+      }
+    }
+
+    .error-container {
+      width: 100%;
+      margin-bottom: 15px;
+
+      .error {
+        width: 100%;
+        margin-bottom: 5px;
+        padding: 5px 5px 5px 10px;
+        border: 1px solid $text_color;
+        border-radius: 0;
+        background-color:  $red_salsa;
+        color:  $mint_cream;
+        position: relative;
+        animation-name: error;
+        animation-duration: .5s;
+
+        @keyframes error {
+          0% { left: -1px }
+          25% { left: 1px }
+          50% { left: -1px }
+          75% { left: 1px }
+          100% { left: -1px }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+@import "../../../../../styles/colors";
+
+:host {
+  flex: 1 0;
+}
+
+.page-not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background: $gunmetal;
+  background-image: url("/assets/background.svg");
+  background-size: 15%;
+
+  .message {
+    position: relative;
+    width: 500px;
+    padding: 45px;
+    border: 1px solid $black_coffee;
+    color: $black_coffee;
+    background: $mint_cream;
+
+    .logo {
+      position: absolute;
+      top: -50px;
+      left: -50px;
+
+      height: 100px;
+      width: 100px;
+    }
+
+    .header {
+      margin-bottom: 25px;
+      color: $gunmetal;
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+
+    .body {
+      margin-bottom: 25px;
+      line-height: 24px;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      .btn {
+        padding: 5px 10px;
+        border: 1px solid $black_coffee;
+        font-size: 16px;
+        background: $timberwolf;
+
+        &:hover,
+        &:active {
+          background: lighten($timberwolf, 5%);
+        }
+      }
+    }
+  }
+}

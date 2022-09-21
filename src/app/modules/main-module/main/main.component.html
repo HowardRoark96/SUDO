@@ -1,0 +1,14 @@
+<div class="header">
+  <a [routerLink]="['']">
+    <img src="assets/logo.svg" alt="Logo">
+  </a>
+  <div class="actions">
+    <button (click)="onMainClick()">Main</button>
+    <button (click)="onStatisticClick()">Statistic</button>
+    <button (click)="onGameClick()">Game</button>
+    <button (click)="onLogoutClick()">Sign out</button>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
+

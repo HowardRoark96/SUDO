@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { LoginComponent } from './login/login.component';
 import { LoginRoutingModule } from './login-routing.module';
+import { SharedModule } from '../shared-module/shared.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
-    LoginRoutingModule
+    CommonModule,
+    LoginRoutingModule,
+    SharedModule.forRoot()
   ],
   providers: [],
   declarations: [
-    LoginComponent,
+    LoginComponent
   ]
 })
 export class LoginModule { }

@@ -1,0 +1,29 @@
+<table class="game-board">
+  <tbody>
+  <tr *ngFor="let line of board; let lineInd = index">
+    <td *ngFor="let cell of line; let cellInd = index"
+        (click)="selectCell(lineInd, cellInd)"
+        [class.disabled]="cell.disable"
+        [class.highlighted-number]="cell.value === selectedNumber"
+        [class.highlighted-disabled-number]="cell.value === selectedNumber && cell.disable"
+        [class.highlighted-cell]="cell.isCellHighlighted"
+        [class.red-text]="!cell.isValid"
+    >
+      <span>
+        {{cell.value !== 0 ? cell.value : ""}}
+      </span>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div
+  class="game-board-locker"
+  *ngIf="gameOver || gamePause">
+  <ng-container *ngIf="gameOver">
+    <div class="title">complete!</div>
+    <div class="game-info"></div>
+  </ng-container>
+  <ng-container *ngIf="gamePause && !gameOver">
+    <div class="title">pause</div>
+  </ng-container>
+</div>

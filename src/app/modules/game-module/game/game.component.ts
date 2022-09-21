@@ -1,30 +1,15 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-
-export interface EmptyCell {
-  rowIndex: string | number,
-  colIndex: string | number,
-  value?: number
-};
-
-export interface Cell {
-  value: number,
-  disable: boolean,
-  isValid: boolean,
-  isCellHighlighted: boolean
-}
-
-interface Board {
-  removedNumbers: EmptyCell[],
-  gameBoard: Cell[][],
-  solvedBoard: Cell[][]
-};
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { interval, of, Subscription, takeWhile, timer } from 'rxjs';
+import { Board } from '../interfaces/board.interface';
+import { Cell } from '../interfaces/cell.interface';
+import { EmptyCell } from '../interfaces/empty-cell.interface';
 
 @Component({
-  selector: 'app-sudoku',
-  templateUrl: './sudoku.component.html',
-  styleUrls: ['./sudoku.component.scss']
+  selector: 'app-game',
+  templateUrl: './game.component.html',
+  styleUrls: ['./game.component.scss']
 })
-export class SudokuComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
   private blankBoard = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -39,17 +24,25 @@ export class SudokuComponent implements OnInit {
   private numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   private countNumsRemovedFromBoard = 25;
   private counter: number;
+  private interval: any;
+
+  selectedNumber = -1;
+  gameTime = 0;
 
   board: Board;
-  isSudokuCorrect = false;
+  isGameFinished = false;
+  isGameActive = false;
 
   constructor(
     private readonly chDet: ChangeDetectorRef
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
     this.generateBoard();
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.interval);
   }
 
   private shuffleArray(array: number[]): number[] {
@@ -290,20 +283,6 @@ export class SudokuComponent implements OnInit {
     return this.getInitialBoard();
   }
 
-  generateBoard(): void {
-    this.board = this.getInitialBoard();
-    this.isSudokuCorrect = false;
-  }
-
-  boardChange(selectedCell: EmptyCell|null): void {
-    this.highlightedCells(selectedCell);
-
-    if(selectedCell) {
-      this.board.gameBoard[+selectedCell.rowIndex][+selectedCell.colIndex].isValid = this.safeToPlace(this.board.gameBoard, selectedCell, selectedCell.value as number);
-      this.isSudokuCorrect = !this.board.gameBoard.some(row => row.some(cell => !cell.isValid));
-    }
-  }
-
   private highlightedCells(selectedCell: EmptyCell|null): void {
     if (!selectedCell) {
       this.board.gameBoard.forEach(row => row.forEach(cell => cell.isCellHighlighted = false));
@@ -325,5 +304,44 @@ export class SudokuComponent implements OnInit {
         }
       });
     }
+  }
+
+  generateBoard(): void {
+    this.board = this.getInitialBoard();
+  }
+
+  boardChange(selectedCell: EmptyCell|null): void {
+    this.highlightedCells(selectedCell);
+
+    if(selectedCell) {
+      this.board.gameBoard[+selectedCell.rowIndex][+selectedCell.colIndex].isValid = this.safeToPlace(this.board.gameBoard, selectedCell, selectedCell.value as number);
+      this.isGameFinished = !this.board.gameBoard.some(row => row.some(cell => !cell.isValid));
+    }
+    if (this.isGameFinished)
+      this.pauseGame();
+  }
+
+  selectNumberChanged(selectedNumber: number) {
+    this.selectedNumber = selectedNumber;
+  }
+
+  getNewGame() {
+    this.generateBoard();
+    this.gameTime = 0;
+    this.isGameActive = false;
+    this.isGameFinished = false;
+    this.pauseGame();
+  }
+
+  pauseGame() {
+    this.isGameActive = !this.isGameActive;
+
+    if (this.isGameActive) {
+      this.interval = setInterval(() => {
+        this.gameTime++;
+      },1000);
+    }
+    else
+      clearInterval(this.interval);
   }
 }

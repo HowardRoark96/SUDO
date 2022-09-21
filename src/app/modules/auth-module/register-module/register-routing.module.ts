@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   {
-    path: 'register',
+    path: '',
     component: RegisterComponent
   }
 ];

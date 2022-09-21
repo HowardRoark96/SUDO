@@ -1,0 +1,15 @@
+<table class="control-panel">
+  <tbody>
+  <tr *ngFor="let row of controlPanel">
+    <td *ngFor="let digit of row"
+        (click)="selectNumber(digit)"
+        [class.selected]="digit === selectedNumber">
+      <span>
+        {{digit}}
+      </span>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="game-over" *ngIf="disableControls"></div>

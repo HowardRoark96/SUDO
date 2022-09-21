@@ -1,0 +1,55 @@
+<form
+  class="auth-form"
+  autocomplete="chrome-off"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()">
+
+  <ng-content select="h1"></ng-content>
+
+  <label class="field">
+    <mat-icon>person</mat-icon>
+    <input type="email"
+           autocomplete="off"
+           placeholder="Enter email address"
+           formControlName="email">
+  </label>
+
+  <label class="field">
+    <mat-icon>lock</mat-icon>
+    <input type="password"
+           name="qdwdqw"
+           id="asdqw"
+           placeholder="Enter password"
+           formControlName="password">
+  </label>
+
+  <div class="error-container">
+    <div
+      *ngIf="isEmailRequired"
+      class="error">
+      Email is required
+    </div>
+
+    <div
+      *ngIf="isEmailInvalid"
+      class="error">
+      Invalid email format
+    </div>
+
+    <div
+      *ngIf="isPasswordInvalid"
+      class="error">
+      Password is required
+    </div>
+
+    <ng-content select=".error"></ng-content>
+  </div>
+
+  <ng-content select="button"></ng-content>
+
+  <div class="auth-form__toggle">
+    <ng-content select="span"></ng-content>
+  </div>
+
+</form>
+

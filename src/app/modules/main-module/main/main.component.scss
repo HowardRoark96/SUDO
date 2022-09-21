@@ -1,0 +1,43 @@
+@import "src/styles/colors";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  padding: 10px;
+  background-color: $gunmetal;
+
+  a,
+  a > img {
+    height: 100%;
+  }
+
+  button {
+    cursor: pointer;
+    outline: 0;
+    border: 1px solid $black_coffee;
+    background: $ivory;
+    color: $black_coffee;
+    padding: 10px 15px;
+    font-size: 16px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background: lighten($mint_cream, 10%);
+      border-color: $black_coffee;
+    }
+
+    &:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+  }
+}

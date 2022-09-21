@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Cell, EmptyCell} from "../sudoku/sudoku.component";
+import { Cell } from '../modules/game-module/interfaces/cell.interface';
+import { EmptyCell } from '../modules/game-module/interfaces/empty-cell.interface';
+
 
 @Component({
   selector: 'app-board',
